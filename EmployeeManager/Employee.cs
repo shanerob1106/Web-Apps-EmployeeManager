@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EmployeeManager
 {
     public class Employee
     {
+        // Getter and setters
         public string FullName { get; set; }
         public string EmployeeID { get; set; }
         public decimal HoursWorked { get; set; }
+
+        // Fixed hourly rate of 9.5 / £9.50
         public decimal HourlyRate = 9.5m;
 
         // Validates the length of the employees name (min 1 char || max 50 char)
@@ -21,11 +25,25 @@ namespace EmployeeManager
 
             while (FullName.Length < 1 || FullName.Length > 50)
             {
-                Console.WriteLine("Error Length incorrect.");
+                Console.WriteLine("Error Length incorrect. Please enter a valid name. ");
                 FullName = Console.ReadLine();
 
             }
             return FullName;
+        }
+
+        // Uses regex to ensure there is a capital letter followed by 2 numbers (e.g., X20)
+        public Boolean regexID(string empID)
+        {
+            string patternText = @"^[A-Z]{1}\d{2}$";
+            Regex reg = new Regex(patternText);
+
+            if (reg.IsMatch(empID))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         // Multiplies HoursWorked by HourlyRate (Fixed rate of 9.5)
