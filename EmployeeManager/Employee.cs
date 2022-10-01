@@ -46,6 +46,17 @@ namespace EmployeeManager
             return false;
         }
 
+        // Checks to see if the employee has worked more than 100 hours or less than 1
+        public Boolean TotalHours(int HoursTotal)
+        {
+            if(HoursTotal < 1 || HoursTotal > 100)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         // Multiplies HoursWorked by HourlyRate (Fixed rate of 9.5)
         public Decimal pay()
         {
